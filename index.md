@@ -5,13 +5,12 @@ tags: fpga vga verilog
 categories: demo
 ---
 
-Add a short welcome message or introduction here. Aim to get the viewer interested in what follows! Guideline: 1 or 2 sentences. 
-
-I am adding a test sentence here at 13:24 on 03/12/24.
+Hello! This is my page for my fpga-vga-driver project. Will include both colour cycle and colour stripes projects.
 
 ## **Template VGA Design**
 ### **Project Set-Up**
-Summarise the project set-up and design flow. Include a screenshot of your own set-up, for example see the image of my Project Summary window below. Guideline 1 short paragraph.
+Today I set up two projects. The first project was the colour cycle project! I downloaded Michelles repo from github, set up a vivado project adn set the clock frequency (in IP catalog) to 25MHz. After running synthesis, implementation and generating bitstream, i programmed the board and the display shows a colour cycle.
+I also created another project for colour stripes, included files from moodle (removed colourCycle), and set up IP as before. Some other changes were necessary for the colour stripes to be displayed. The instantiation needed to be changed to "ColourStripes u_colour_stripes" instead of ColourCycle... as well as adding .row(row) and .col(col) to the instantiation. Now stripes is displayed after programming the board. 
 
 <img src="https://raw.githubusercontent.com/melgineer/fpga-vga-verilog/main/docs/assets/images/VGAPrjSum.png">
 ### **Template Code**
