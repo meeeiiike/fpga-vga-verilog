@@ -9,28 +9,36 @@ Hello! This is my page for my fpga-vga-driver project.
 
 ## **Template VGA Design**
 ### **Project Set-Up**
-We were given some code templates to start such as colour stripes/cycle, VGATop, Constarints file and Testbench! Setting up and running the cycle project was quite simple. We added a 25Mhz clk frequency (Using Clk wiz in IP catalog) which is used in the sync. Then simply run simulation, see if timing is correct, run synthesis and implementation to view the hardware design of our code, adn finally generate a bitstream and program our board. With cycle, it displayed a few colours changing about twice a second. 
+We were given some code templates to start such as colour stripes/cycle, VGATop, Constarints file and Testbench! These templates got us up and running, with all the timing needed for our 640 by 480 dislpay. Using the 100Mhz Oscillator on the chip we brought that down to a 25Mhz clk frequency (Using Clk wiz in IP catalog) which is used in the sync. This is how it knows when to draw the rows and columns, and obviously for the cycle aswell its quite important. Colour Cycle uses this timing to cycle through the colours lncluded quite fast, around twice a second, while stripes divided the screen in columns of 80 pixels, each column a different colour.
 
-I also created another project for colour stripes, included files from moodle (removed colourCycle), and set up IP as before. Some other changes were necessary for the colour stripes to be displayed. The instantiation needed to be changed to "ColourStripes u_colour_stripes" instead of ColourCycle... as well as adding .row(row) and .col(col) to the instantiation. Now stripes is displayed after programming the board. 
+With all the templates, minimal change was made, especially with the timing and sync. From what i understand from lectures and praticals: A hsync signal goes enables pixels to be drawn each row, with some deadband periods on either end (back/front porch), while the vsync signal goes high for a period of 1 frame, with the same deadbands. After 1 frame, row & col are reset to (0,0). I believe this is called 'Raster'.
 
-
+// REMOVE/EDIT
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b" />
+//
 
 ### **Template Code**
-Outline the structure and design of the Verilog code templates you were given. What do they do? Include reference to how a VGA interface works. Guideline: 2/3 short paragraphs, consider including screenshot(s).
+VGA_Sync -> Controls the timing signals for our 640 by 480 display, using the 25Mhz clock set in Ip Catalog. Takes in 25Mhz clk signal, reset and outputs hsync, vsync, vid_on as well as Row and Col signals. Also defines high an low limits (deadband).
+
+VGA_Top -> This module instantiates the ColorCycle/Stripes, sync and clk_wiz modules and assigns the rgb values only if vid_on signal is true. Takes in clk and reset, outputs hsysnc, vsync  the colours RGB signals (VGA_RED[3:0]) etc...
+
+Colour_Stripes -> Uses the columns to define 80 pixel towers essentially of different colours, from black to white. Includes a few condtional statements to assigns values inside always block.
+
+Colour_Cycle -> Cycle uses timing signals to change the colour displayed often. Colours are listed as variables and a counter is used to iterate through all them in a case statement.
+
 ### **Simulation**
-Explain the simulation process. Reference any important details, include a well-selected screenshot of the simulation. Guideline: 1/2 short paragraphs.
+Unfortunately, as shown in the screenshot i had some issues with my timing, aswell as my simulation. I beleive its due to my huge combinational logic in my colour module. Anyways, if i could get it working normally, i could use it to check all signals are coming in as expected. Using simulation we can make sure our display is drawing correctly using the signals coming in.
 ### **Synthesis**
-Describe the synthesis and implementation processes. Consider including 1/2 useful screenshot(s). Guideline: 1/2 short paragraphs.
-### **Demonstration**
-Perhaps add a picture of your demo. Guideline: 1/2 sentences.
+Using Synthesis, it takes our code and creates an optimised hardware schematic diagram with the likes of registers, Look up tables flip flops etc... Then implementation takes this design and places it on the FPGA itself! This diagram shows the actual board we're using and shows all the connections!
+So from what i understand, this tool is extremely useful as we can test and simulate deigns from a low level, we can sythesise to see our deisgn on hardware, then implement the design onto the Basys3 Board! 
 
 ## **My VGA Design Edit**
-Introduce your own design idea. Consider how complex/achievabble this might be or otherwise. Reference any research you do online (use hyperlinks).
+I decided to go with a design true to heart... i spent years of my life creating pixel art inside of video games like minecraft making pictures of characters such as mario, so it only made sense to go with mario :D 
+At first i wanted to create an image similar to what i currently have, and modify it a little so i could make 2 or 3 scenes/frames i could cycle through, but unfortunately i dont think ill make it to the dynamic part of tis project, just the static mario image.
 ### **Code Adaptation**
-Briefly show how you changed the template code to display a different image. Demonstrate your understanding. Guideline: 1-2 short paragraphs.
+Changes made involved editing and adding to the colour_stripes / cycle instantiation to accomadate the module name as well as adding variables row and col to this instantiation. Timing clk was changed in wiz_clk to create a 25Mhz signal, as well as plenty of combinational logic ( if...else if...else if...) to create my mario image!
 ### **Simulation**
-Show how you simulated your own design. Are there any things to note? Demonstrate your understanding. Add a screenshot. Guideline: 1-2 short paragraphs.
+As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. TODO; continue from here
 ### **Synthesis**
 Describe the synthesis & implementation outputs for your design, are there any differences to that of the original design? Guideline 1-2 short paragraphs.
 ### **Demonstration**
