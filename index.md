@@ -5,12 +5,14 @@ tags: fpga vga verilog
 categories: demo
 ---
 
-Hello! This is my page for my fpga-vga-driver project. Will include both colour cycle and colour stripes projects.
+Hello! This is my page for my fpga-vga-driver project.
 
 ## **Template VGA Design**
 ### **Project Set-Up**
-Today I set up two projects. The first project was the colour cycle project! I downloaded Michelles repo from github, set up a vivado project adn set the clock frequency (in IP catalog) to 25MHz. After running synthesis, implementation and generating bitstream, i programmed the board and the display shows a colour cycle.
+We were given some code templates to start such as colour stripes/cycle, VGATop, Constarints file and Testbench! Setting up and running the cycle project was quite simple. We added a 25Mhz clk frequency (Using Clk wiz in IP catalog) which is used in the sync. Then simply run simulation, see if timing is correct, run synthesis and implementation to view the hardware design of our code, adn finally generate a bitstream and program our board. With cycle, it displayed a few colours changing about twice a second. 
+
 I also created another project for colour stripes, included files from moodle (removed colourCycle), and set up IP as before. Some other changes were necessary for the colour stripes to be displayed. The instantiation needed to be changed to "ColourStripes u_colour_stripes" instead of ColourCycle... as well as adding .row(row) and .col(col) to the instantiation. Now stripes is displayed after programming the board. 
+
 
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b" />
 
