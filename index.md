@@ -35,29 +35,28 @@ So from what i understand, this tool is extremely useful as we can test and simu
 ## **My VGA Design Edit**
 I decided to go with a design true to heart... i spent years of my life creating pixel art inside of video games like minecraft making pictures of characters such as mario, so it only made sense to go with mario :D 
 At first i wanted to create an image similar to what i currently have, and modify it a little so i could make 2 or 3 scenes/frames i could cycle through, but unfortunately i dont think ill make it to the dynamic part of tis project, just the static mario image.
+
+LINK IMAGE: 
+
 ### **Code Adaptation**
 Changes made involved editing and adding to the colour_stripes / cycle instantiation to accomadate the module name as well as adding variables row and col to this instantiation. Timing clk was changed in wiz_clk to create a 25Mhz signal, as well as plenty of combinational logic ( if...else if...else if...) to create my mario image!
+
+LINK IMAGE: 
+
 ### **Simulation**
-As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. TODO; continue from here
+As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. Even though my simulation didnt provide any useful signals, i did simulate the previous templates given which all showed clean signals, proving to me all the timing and sync and other modules were working perfectly so i continued on.
+
+LINK IMAGE: 
+
 ### **Synthesis**
-Describe the synthesis & implementation outputs for your design, are there any differences to that of the original design? Guideline 1-2 short paragraphs.
+Running Synhesis and implementation on the templates was a lot quicker. As my code turned into hundreds of lines of unoptimized combinational logic, it seemed to take a LOT longer, a couple minutes atleast. Inlcuded below is a screesnhot of my synthesis and implementation showing how all my code is drawn out on hardware
+
+LINK IMAGE: 
+
 ### **Demonstration**
-If you get your own design working on the Basys3 board, take a picture! Guideline: 1-2 sentences.
 
-## **More Markdown Basics**
-This is a paragraph. Add an empty line to start a new paragraph.
+LINK IMAGE: 
 
-Font can be emphasised as *Italic* or **Bold**.
-
-Code can be highlighted by using `backticks`.
-
-Hyperlinks look like this: [GitHub Help](https://help.github.com/).
-
-A bullet list can be rendered as follows:
-- vectors
-- algorithms
-- iterators
 
 Images can be added by uploading them to the repository in a /docs/assets/images folder, and then rendering using HTML via githubusercontent.com as shown in the example below.
-
 <img src="https://raw.githubusercontent.com/melgineer/fpga-vga-verilog/main/docs/assets/images/VGAPrjSrcs.png">
