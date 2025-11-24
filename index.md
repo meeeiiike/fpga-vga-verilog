@@ -13,9 +13,7 @@ We were given some code templates to start such as colour stripes/cycle, VGATop,
 
 With all the templates, minimal change was made, especially with the timing and sync. From what i understand from lectures and pracicals: A hsync signal goes enables pixels to be drawn each row, with some deadband periods on either end (back/front porch), while the vsync signal goes high for a period of 1 frame, with the same deadbands. After 1 frame, row & col are reset to (0,0). I believe this is called 'Raster'.
 
-
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b" />
-<img width="1131" height="624" alt="image" src="docs/assets/images/ColorStripes Always Block.png" />
 
 ### **Template Code**
 VGA_Sync -> Controls the timing signals for our 640 by 480 display, using the 25Mhz clock set in Ip Catalog. Takes in 25Mhz clk signal, reset and outputs hsync, vsync, vid_on as well as Row and Col signals. Also defines high an low limits (deadband).
@@ -32,6 +30,8 @@ Unfortunately, as shown in the screenshot i had some issues with my timing, aswe
 Using Synthesis, it takes our code and creates an optimised hardware schematic diagram with the likes of registers, Look up tables flip flops etc... Then implementation takes this design and places it on the FPGA itself! This diagram shows the actual board we're using and shows all the connections!
 So from what i understand, this tool is extremely useful as we can test and simulate deigns from a low level, we can sythesise to see our deisgn on hardware, then implement the design onto the Basys3 Board! 
 
+<img src="docs/assets/images/Stripes.jpg"/>
+
 ## **My VGA Design Edit**
 I decided to go with a design true to heart... i spent years of my life creating pixel art inside of video games like minecraft making pictures of characters such as mario, so it only made sense to go with mario :D 
 At first i wanted to create an image similar to what i currently have, and modify it a little so i could make 2 or 3 scenes/frames i could cycle through, but unfortunately i dont think ill make it to the dynamic part of tis project, just the static mario image.
@@ -41,22 +41,23 @@ LINK IMAGE:
 ### **Code Adaptation**
 Changes made involved editing and adding to the colour_stripes / cycle instantiation to accomadate the module name as well as adding variables row and col to this instantiation. Timing clk was changed in wiz_clk to create a 25Mhz signal, as well as plenty of combinational logic ( if...else if...else if...) to create my mario image!
 
-LINK IMAGE: 
+<img width="1131" height="624" alt="image" src="docs/assets/images/MARIO.jpg"/>
+<img src="docs/assets/images/Linter Design.png"/>
 
 ### **Simulation**
 As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. Even though my simulation didnt provide any useful signals, i did simulate the previous templates given which all showed clean signals, proving to me all the timing and sync and other modules were working perfectly so i continued on.
 
-LINK IMAGE: 
+<img width="1131" height="624" alt="image" src="docs/assets/images/Simulation.png"/>
+<img src="docs/assets/images/ColourStripesAlwaysBlock.png"/>
+<img src="docs/assets/images/TimingErrorExplanation.jpg"/>
+
 
 ### **Synthesis**
 Running Synhesis and implementation on the templates was a lot quicker. As my code turned into hundreds of lines of unoptimized combinational logic, it seemed to take a LOT longer, a couple minutes atleast. Inlcuded below is a screesnhot of my synthesis and implementation showing how all my code is drawn out on hardware
 
-LINK IMAGE: 
+<img src="docs/assets/images/SynthesisImplementation.png"/>
 
 ### **Demonstration**
 
-LINK IMAGE: 
+<img src="docs/assets/images/VGA_TopDiagram.jpg"/>
 
-
-Images can be added by uploading them to the repository in a /docs/assets/images folder, and then rendering using HTML via githubusercontent.com as shown in the example below.
-<img src="https://raw.githubusercontent.com/melgineer/fpga-vga-verilog/main/docs/assets/images/VGAPrjSrcs.png">
