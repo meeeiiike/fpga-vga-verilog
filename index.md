@@ -9,14 +9,13 @@ Hello! This is my page for my fpga-vga-driver project.
 
 ## **Template VGA Design**
 ### **Project Set-Up**
-We were given some code templates to start such as colour stripes/cycle, VGATop, Constarints file and Testbench! These templates got us up and running, with all the timing needed for our 640 by 480 dislpay. Using the 100Mhz Oscillator on the chip we brought that down to a 25Mhz clk frequency (Using Clk wiz in IP catalog) which is used in the sync. This is how it knows when to draw the rows and columns, and obviously for the cycle aswell its quite important. Colour Cycle uses this timing to cycle through the colours lncluded quite fast, around twice a second, while stripes divided the screen in columns of 80 pixels, each column a different colour.
+We were given some code templates to start such as colour stripes/cycle, VGATop, Constraints file and Testbench! These templates got us up and running, with all the timing needed for our 640 by 480 dislpay. Using the 100Mhz Oscillator on the chip we brought that down to a 25Mhz clk frequency (Using Clk wiz in IP catalog) which is used in the sync. This is how it knows when to draw the rows and columns, and obviously for the cycle aswell its quite important. Colour Cycle uses this timing to cycle through the colours lncluded quite fast, around twice a second, while stripes divided the screen in columns of 80 pixels, each column a different colour.
 
-With all the templates, minimal change was made, especially with the timing and sync. From what i understand from lectures and praticals: A hsync signal goes enables pixels to be drawn each row, with some deadband periods on either end (back/front porch), while the vsync signal goes high for a period of 1 frame, with the same deadbands. After 1 frame, row & col are reset to (0,0). I believe this is called 'Raster'.
+With all the templates, minimal change was made, especially with the timing and sync. From what i understand from lectures and pracicals: A hsync signal goes enables pixels to be drawn each row, with some deadband periods on either end (back/front porch), while the vsync signal goes high for a period of 1 frame, with the same deadbands. After 1 frame, row & col are reset to (0,0). I believe this is called 'Raster'.
 
-// REMOVE/EDIT
+
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b" />
-//
-<img width="1131" height="624" alt="image" src="[https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b](https://github.com/meeeiiike/fpga-vga-verilog/blob/main/docs/assets/images/ColorStripes%20Always%20Block.png)" />
+<img width="1131" height="624" alt="image" src="docs/assets/images/ColorStripes Always Block.png" />
 
 ### **Template Code**
 VGA_Sync -> Controls the timing signals for our 640 by 480 display, using the 25Mhz clock set in Ip Catalog. Takes in 25Mhz clk signal, reset and outputs hsync, vsync, vid_on as well as Row and Col signals. Also defines high an low limits (deadband).
