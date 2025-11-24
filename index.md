@@ -16,6 +16,7 @@ With all the templates, minimal change was made, especially with the timing and 
 // REMOVE/EDIT
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b" />
 //
+<img width="1131" height="624" alt="image" src="[https://github.com/user-attachments/assets/b1a8cf5e-bd37-45f6-a3fa-c9fc8e8b325b](https://github.com/meeeiiike/fpga-vga-verilog/blob/main/docs/assets/images/ColorStripes%20Always%20Block.png)" />
 
 ### **Template Code**
 VGA_Sync -> Controls the timing signals for our 640 by 480 display, using the 25Mhz clock set in Ip Catalog. Takes in 25Mhz clk signal, reset and outputs hsync, vsync, vid_on as well as Row and Col signals. Also defines high an low limits (deadband).
