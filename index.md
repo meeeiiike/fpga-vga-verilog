@@ -29,7 +29,7 @@ Colour_Cycle -> Cycle uses timing signals to change the colour displayed often. 
 ### **Simulation**
 Unfortunately, as shown in the screenshot i had some issues with my timing, aswell as my simulation. I beleive its due to my huge combinational logic in my colour module. Anyways, if i could get it working normally, i could use it to check all signals are coming in as expected. Using simulation we can make sure our display is drawing correctly using the signals coming in.
 ### **Synthesis**
-Using Synthesis, it takes our code and creates an optimised hardware schematic diagram with the likes of registers, Look up tables flip flops etc... Then implementation takes this design and places it on the FPGA itself! This diagram shows the actual board we're using and shows all the connections!
+Using Synthesis, it takes our code and creates an optimised hardware schematic diagram with the likes of registers, Look up tables flip flops etc... Then implementation takes this design and places it on the FPGA itself! The diagram shows the actual board we're using and shows all the connections!
 So from what i understand, this tool is extremely useful as we can test and simulate deigns from a low level, we can sythesise to see our deisgn on hardware, then implement the design onto the Basys3 Board! 
 
 ### **Demonstration**
@@ -45,18 +45,18 @@ At first i wanted to create an image similar to what i currently have, and modif
 ### **Code Adaptation**
 Changes made involved editing and adding to the colour_stripes / cycle instantiation to accomadate the module name as well as adding variables row and col to this instantiation. Timing clk was changed in wiz_clk to create a 25Mhz signal, as well as plenty of combinational logic ( if...else if...else if...) to create my mario image!
 
-As shown below, and explained later, the huge amount of combinational logic lead to timing issues due to the amount of logic trying to fit into the 10us period.
+As shown below, and explained later, the huge amount of combinational logic lead to timing issues due to the amount of logic trying to fit into the 10ns period.
 
 <img src="docs/assets/images/ColourStripesAlwaysBlock.png"/>
 
 <img src="docs/assets/images/Linter Design.png"/>
 
 ### **Simulation**
-As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. Even though my simulation didnt provide any useful signals, i did simulate the previous templates given which all showed clean signals, proving to me all the timing and sync and other modules were working perfectly so i continued on.
+As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10ns signal period. Even though my simulation didnt provide any useful signals, i did simulate the previous templates given which all showed clean signals, proving to me all the timing and sync and other modules were working perfectly so i continued on.
 
 <img src="docs/assets/images/Simulation.png"/>
 
-Here is an example from a SoC lecture which visually shows the the issue i faced, with such timing limitations, trying to fix so much logic in was not going to work unless i split it up (pipelined).
+Here is an example from a SoC lecture which visually shows the the issue i faced, with such timing limitations, trying to fit so much logic in was not going to work unless i split it up (pipelined).
 <img src="docs/assets/images/TimingErrorExplanation.jpg"/>
 
 
