@@ -18,9 +18,9 @@ With all the templates, minimal change was made, especially with the timing and 
 ### **Template Code**
 VGA_Sync -> Controls the timing signals for our 640 by 480 display, using the 25Mhz clock set in Ip Catalog. Takes in 25Mhz clk signal, reset and outputs hsync, vsync, vid_on as well as Row and Col signals. Also defines high an low limits (deadband).
 
-<img src="docs/assets/images/VGA_TopDiagram.jpg"/>
-
 VGA_Top -> This module instantiates the ColorCycle/Stripes, sync and clk_wiz modules and assigns the rgb values only if vid_on signal is true. Takes in clk and reset, outputs hsysnc, vsync  the colours RGB signals (VGA_RED[3:0]) etc...
+
+<img src="docs/assets/images/VGA_TopDiagram.jpg"/>
 
 Colour_Stripes -> Uses the columns to define 80 pixel towers essentially of different colours, from black to white. Includes a few condtional statements to assigns values inside always block.
 
@@ -45,13 +45,18 @@ At first i wanted to create an image similar to what i currently have, and modif
 ### **Code Adaptation**
 Changes made involved editing and adding to the colour_stripes / cycle instantiation to accomadate the module name as well as adding variables row and col to this instantiation. Timing clk was changed in wiz_clk to create a 25Mhz signal, as well as plenty of combinational logic ( if...else if...else if...) to create my mario image!
 
+As shown below, and explained later, the huge amount of combinational logic lead to timing issues due to the amount of logic trying to fit into the 10us period.
+
+<img src="docs/assets/images/ColourStripesAlwaysBlock.png"/>
+
 <img src="docs/assets/images/Linter Design.png"/>
 
 ### **Simulation**
 As stated before, i seem to be having issues with simulating my design, likely due to the HEAPS of combinational logic fitting in to a 10us signal period. Even though my simulation didnt provide any useful signals, i did simulate the previous templates given which all showed clean signals, proving to me all the timing and sync and other modules were working perfectly so i continued on.
 
 <img src="docs/assets/images/Simulation.png"/>
-<img src="docs/assets/images/ColourStripesAlwaysBlock.png"/>
+
+Here is an example from a SoC lecture which visually shows the the issue i faced, with such timing limitations, trying to fix so much logic in was not going to work unless i split it up (pipelined).
 <img src="docs/assets/images/TimingErrorExplanation.jpg"/>
 
 
